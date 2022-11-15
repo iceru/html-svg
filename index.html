@@ -17,8 +17,6 @@
                 <linearGradient gradientUnits="userSpaceOnUse" x1="290" y1="75.03" x2="290" y2="294.97" id="gradient-0"
                     gradientTransform="matrix(0.791439, 0.611247, -0.401448, 0.51979, 156.294247, -119.337369)"
                     spreadMethod="pad">
-                    <stop stop-color="red" offset="0%" />
-                    <stop stop-color="darkred" offset="100%" />
                 </linearGradient>
             </defs>
             <path
@@ -31,10 +29,30 @@
     </div>
 
     <script>
-        const dataGradient = ['#fff', '#000']
-        document.querySelectorAll("linearGradient > stop").forEach((el, i) => {
-            el.setAttribute("stop-color", dataGradient[i])
-        })
+        const dataGradient = [
+            {
+                color: '#fff',
+                offset: '0%',
+            },
+            {
+                color: "#000",
+                offset: '100%',
+            }
+        ];
+        const svgns = 'http://www.w3.org/2000/svg';
+        for (let index = 0; index < dataGradient.length; index++) {
+            const element = document.createElementNS(svgns, 'stop')
+            element.setAttribute(
+                'offset', dataGradient[index].offset,
+            )
+            element.setAttribute(
+                "stop-color", dataGradient[index].color
+            )
+            document.querySelector("linearGradient").append(element);
+        }
+        // document.querySelector("linearGradient").forEach((el, i) => {
+        //     el.append("stop-color", dataGradient[i])
+        // })
     </script>
 </body>
 
